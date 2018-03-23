@@ -1,0 +1,21 @@
+@import 'true';
+
+@import '../main';
+
+@include describe('Test...') {
+  @include it('should work') {
+    @include assert {
+      @include output {
+        .sample {
+          content: $helloworld;
+        }
+      }
+
+      @include expect {
+        .sample {
+          content: hello_world;
+        }
+      }
+    }
+  }
+}
