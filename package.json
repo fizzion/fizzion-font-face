@@ -1,0 +1,28 @@
+{
+  "name": "fizzion-font-face",
+  "version": "0.0.1",
+  "description": "@font-face utilities",
+  "main": "main.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fizzion/fizzion-font-face.git"
+  },
+  "keywords": [
+    "font-face",
+    "fizzion"
+  ],
+  "author": "Alex Lemanski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fizzion/fizzion-font-face/issues"
+  },
+  "homepage": "https://github.com/fizzion/fizzion-font-face#readme",
+  "devDependencies": {
+    "mocha": "^5.0.4",
+    "node-sass": "^4.7.2",
+    "sass-true": "^3.1.0"
+  }
+}
