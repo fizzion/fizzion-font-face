@@ -5,4 +5,16 @@
  *   (https://github.com/fizzion/fizzion-font-face/blob/master/LICENSE.md)
  */
 
-$helloworld: hello_world;
+@mixin woff-font-face($url, $family: null, $weight: null, $style: null) {
+  $quoted-url: quote($url);
+  @if $family != null {
+    font-family: $family;
+  }
+  @if $weight != null {
+    font-weight: $weight;
+  }
+  @if $style != null {
+    font-style: $style;
+  }
+  src: url($quoted-url) format(quote(woff));
+}
