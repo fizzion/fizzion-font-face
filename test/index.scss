@@ -2,19 +2,80 @@
 
 @import '../main';
 
-@include describe('Test...') {
-  @include it('should work') {
+@include describe('@mixin woff-font-face') {
+  @include it('Given path or url, it should add it to output') {
     @include assert {
+      $sample-url: quote('//fonts.com/font.woff');
+
       @include output {
-        .sample {
-          content: $helloworld;
-        }
+        @include woff-font-face('//fonts.com/font.woff');
       }
 
       @include expect {
-        .sample {
-          content: hello_world;
-        }
+        src: url($sample-url) format(quote(woff));
+      }
+    }
+  }
+
+  @include it('Given url and family it should add it to output') {
+    @include assert {
+      $sample-url: quote('//fonts.com/font.woff');
+
+      @include output {
+        @include woff-font-face('//fonts.com/font.woff', fake-font);
+      }
+
+      @include expect {
+        font-family: fake-font;
+        src: url($sample-url) format(quote(woff));
+      }
+    }
+  }
+
+  @include it('Given url, family, and weight it should add it to output') {
+    @include assert {
+      $sample-url: quote('//fonts.com/font.woff');
+
+      @include output {
+        @include woff-font-face('//fonts.com/font.woff', fake-font, 400);
+      }
+
+      @include expect {
+        font-family: fake-font;
+        font-weight: 400;
+        src: url($sample-url) format(quote(woff));
+      }
+    }
+  }
+
+  @include it('Given url, family, weight, and style it should add it to output') {
+    @include assert {
+      $sample-url: quote('//fonts.com/font.woff');
+
+      @include output {
+        @include woff-font-face('//fonts.com/font.woff', fake-font, 400, italic);
+      }
+
+      @include expect {
+        font-family: fake-font;
+        font-weight: 400;
+        font-style: italic;
+        src: url($sample-url) format(quote(woff));
+      }
+    }
+  }
+
+  @include it('Given url and one of family, weight, or style, it should add it to output') {
+    @include assert {
+      $sample-url: quote('//fonts.com/font.woff');
+
+      @include output {
+        @include woff-font-face('//fonts.com/font.woff', $weight: 400);
+      }
+
+      @include expect {
+        font-weight: 400;
+        src: url($sample-url) format(quote(woff));
       }
     }
   }
