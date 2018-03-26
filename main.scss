@@ -27,7 +27,7 @@
     src: url($url);
     $url-format-list: append(
       $url-format-list,
-      url($url + '?#iefix') format(quote(eot)),
+      url($url + '?#iefix') format(quote(embedded-opentype)),
       'comma'
     );
   }

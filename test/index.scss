@@ -98,7 +98,7 @@
         $sample-url: quote('//fonts.com/font.eot');
         $sample-url-with-hack: quote('//fonts.com/font.eot?#iefix');
         src: url($sample-url);
-        src: url($sample-url-with-hack) format(quote(eot));
+        src: url($sample-url-with-hack) format(quote(embedded-opentype));
       }
     }
   }
@@ -119,7 +119,7 @@
         $sample-eot-url-with-hack: quote('//fonts.com/font.eot?#iefix');
         $sample-woff-url: quote('//fonts.com/font.woff');
         src: url($sample-eot-url);
-        src: url($sample-eot-url-with-hack) format(quote(eot)),
+        src: url($sample-eot-url-with-hack) format(quote(embedded-opentype)),
           url($sample-woff-url) format(quote(woff));
       }
     }
@@ -141,7 +141,7 @@
         $sample-eot-url-with-hack: quote('//fonts.com/font.eot?#iefix');
         $sample-woff-url: quote('//fonts.com/font.woff2');
         src: url($sample-eot-url);
-        src: url($sample-eot-url-with-hack) format(quote(eot)),
+        src: url($sample-eot-url-with-hack) format(quote(embedded-opentype)),
           url($sample-woff-url) format(quote(woff2));
       }
     }
@@ -163,7 +163,7 @@
         $sample-eot-url-with-hack: quote('//fonts.com/font.eot?#iefix');
         $sample-ttf-url: quote('//fonts.com/font.ttf');
         src: url($sample-eot-url);
-        src: url($sample-eot-url-with-hack) format(quote(eot)),
+        src: url($sample-eot-url-with-hack) format(quote(embedded-opentype)),
           url($sample-ttf-url) format(quote(truetype));
       }
     }
@@ -185,7 +185,7 @@
         $sample-eot-url-with-hack: quote('//fonts.com/font.eot?#iefix');
         $sample-svg-url: quote('//fonts.com/font.svg');
         src: url($sample-eot-url);
-        src: url($sample-eot-url-with-hack) format(quote(eot)),
+        src: url($sample-eot-url-with-hack) format(quote(embedded-opentype)),
           url($sample-svg-url) format(quote(svg));
       }
     }
@@ -195,7 +195,7 @@
     @include assert {
       @include output {
         $font-map: (
-          'svg': '//fonts.com/font.svg',
+          'svg': '//fonts.com/font.svg#font',
           'woff': '//fonts.com/font.woff',
           'eot': '//fonts.com/font.eot',
           'truetype': '//fonts.com/font.ttf',
@@ -211,10 +211,10 @@
         $sample-woff2-url: quote('//fonts.com/font.woff2');
         $sample-woff-url: quote('//fonts.com/font.woff');
         $sample-ttf-url: quote('//fonts.com/font.ttf');
-        $sample-svg-url: quote('//fonts.com/font.svg');
+        $sample-svg-url: quote('//fonts.com/font.svg#font');
 
         src: url($sample-eot-url);
-        src: url($sample-eot-url-with-hack) format(quote(eot)),
+        src: url($sample-eot-url-with-hack) format(quote(embedded-opentype)),
           url($sample-woff2-url) format(quote(woff2)),
           url($sample-woff-url) format(quote(woff)),
           url($sample-ttf-url) format(quote(truetype)),
