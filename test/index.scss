@@ -80,3 +80,146 @@
     }
   }
 }
+
+@include describe('@mixin map-font-face') {
+  @include it('mixin exists') {
+    @include assert-true(mixin-exists(map-font-face));
+  }
+
+  @include it('should include .eot in the two necessary ways when a .eot is in the map') {
+    @include assert {
+      @include output {
+        $font-map: ('eot': '//fonts.com/font.eot');
+
+        @include map-font-face($font-map);
+      }
+
+      @include expect {
+        $sample-url: quote('//fonts.com/font.eot');
+        $sample-url-with-hack: quote('//fonts.com/font.eot?#iefix');
+        src: url($sample-url);
+        src: url($sample-url-with-hack) format(quote(eot));
+      }
+    }
+  }
+
+  @include it('should include a .woff when a .woff is in the map') {
+    @include assert {
+      @include output {
+        $font-map: (
+          'woff': '//fonts.com/font.woff',
+          'eot': '//fonts.com/font.eot'
+        );
+
+        @include map-font-face($font-map);
+      }
+
+      @include expect {
+        $sample-eot-url: quote('//fonts.com/font.eot');
+        $sample-eot-url-with-hack: quote('//fonts.com/font.eot?#iefix');
+        $sample-woff-url: quote('//fonts.com/font.woff');
+        src: url($sample-eot-url);
+        src: url($sample-eot-url-with-hack) format(quote(eot)),
+          url($sample-woff-url) format(quote(woff));
+      }
+    }
+  }
+
+  @include it('should include a .woff2 when a .woff2 is in the map') {
+    @include assert {
+      @include output {
+        $font-map: (
+          'woff2': '//fonts.com/font.woff2',
+          'eot': '//fonts.com/font.eot'
+        );
+
+        @include map-font-face($font-map);
+      }
+
+      @include expect {
+        $sample-eot-url: quote('//fonts.com/font.eot');
+        $sample-eot-url-with-hack: quote('//fonts.com/font.eot?#iefix');
+        $sample-woff-url: quote('//fonts.com/font.woff2');
+        src: url($sample-eot-url);
+        src: url($sample-eot-url-with-hack) format(quote(eot)),
+          url($sample-woff-url) format(quote(woff2));
+      }
+    }
+  }
+
+  @include it('should include a .ttf when a truetype is in the map') {
+    @include assert {
+      @include output {
+        $font-map: (
+          'truetype': '//fonts.com/font.ttf',
+          'eot': '//fonts.com/font.eot'
+        );
+
+        @include map-font-face($font-map);
+      }
+
+      @include expect {
+        $sample-eot-url: quote('//fonts.com/font.eot');
+        $sample-eot-url-with-hack: quote('//fonts.com/font.eot?#iefix');
+        $sample-ttf-url: quote('//fonts.com/font.ttf');
+        src: url($sample-eot-url);
+        src: url($sample-eot-url-with-hack) format(quote(eot)),
+          url($sample-ttf-url) format(quote(truetype));
+      }
+    }
+  }
+
+  @include it('should include a .svg when a svg is in the map') {
+    @include assert {
+      @include output {
+        $font-map: (
+          'svg': '//fonts.com/font.svg',
+          'eot': '//fonts.com/font.eot'
+        );
+
+        @include map-font-face($font-map);
+      }
+
+      @include expect {
+        $sample-eot-url: quote('//fonts.com/font.eot');
+        $sample-eot-url-with-hack: quote('//fonts.com/font.eot?#iefix');
+        $sample-svg-url: quote('//fonts.com/font.svg');
+        src: url($sample-eot-url);
+        src: url($sample-eot-url-with-hack) format(quote(eot)),
+          url($sample-svg-url) format(quote(svg));
+      }
+    }
+  }
+
+  @include it('should include all font types in proper order when all are included in the map') {
+    @include assert {
+      @include output {
+        $font-map: (
+          'svg': '//fonts.com/font.svg',
+          'woff': '//fonts.com/font.woff',
+          'eot': '//fonts.com/font.eot',
+          'truetype': '//fonts.com/font.ttf',
+          'woff2': '//fonts.com/font.woff2'
+        );
+
+        @include map-font-face($font-map);
+      }
+
+      @include expect {
+        $sample-eot-url: quote('//fonts.com/font.eot');
+        $sample-eot-url-with-hack: quote('//fonts.com/font.eot?#iefix');
+        $sample-woff2-url: quote('//fonts.com/font.woff2');
+        $sample-woff-url: quote('//fonts.com/font.woff');
+        $sample-ttf-url: quote('//fonts.com/font.ttf');
+        $sample-svg-url: quote('//fonts.com/font.svg');
+
+        src: url($sample-eot-url);
+        src: url($sample-eot-url-with-hack) format(quote(eot)),
+          url($sample-woff2-url) format(quote(woff2)),
+          url($sample-woff-url) format(quote(woff)),
+          url($sample-ttf-url) format(quote(truetype)),
+          url($sample-svg-url) format(quote(svg));
+      }
+    }
+  }
+}

@@ -18,3 +18,55 @@
   }
   src: url($quoted-url) format(quote(woff));
 }
+
+@mixin map-font-face($font-map) {
+  $url-format-list: () !default;
+
+  @if map-has-key($font-map, 'eot') {
+    $url: quote(map-get($font-map, 'eot'));
+    src: url($url);
+    $url-format-list: append(
+      $url-format-list,
+      url($url + '?#iefix') format(quote(eot)),
+      'comma'
+    );
+  }
+
+  @if map-has-key($font-map, 'woff2') {
+    $url: quote(map-get($font-map, 'woff2'));
+    $url-format-list: append(
+      $url-format-list,
+      url($url) format(quote(woff2)),
+      'comma'
+    );
+  }
+
+  @if map-has-key($font-map, 'woff') {
+    $url: quote(map-get($font-map, 'woff'));
+    $url-format-list: append(
+      $url-format-list,
+      url($url) format(quote(woff)),
+      'comma'
+    );
+  }
+
+  @if map-has-key($font-map, 'truetype') {
+    $url: quote(map-get($font-map, 'truetype'));
+    $url-format-list: append(
+      $url-format-list,
+      url($url) format(quote(truetype)),
+      'comma'
+    );
+  }
+
+  @if map-has-key($font-map, 'svg') {
+    $url: quote(map-get($font-map, 'svg'));
+    $url-format-list: append(
+      $url-format-list,
+      url($url) format(quote(svg)),
+      'comma'
+    );
+  }
+
+  src: $url-format-list;
+}
