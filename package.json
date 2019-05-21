@@ -1,6 +1,6 @@
 {
   "name": "fizzion-font-face",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "@font-face utilities",
   "main": "main.scss",
   "scripts": {
